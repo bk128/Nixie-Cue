@@ -1,34 +1,24 @@
-# Nick2-Nixie-Clock
-Nixie clocks based on ESP8266 and NTP, easily flashable (NodeMCU style) and super slim
+# Nixie Cue
 
-**!!! This project involves high voltage, make this at your own risk !!!**
+Nixie Cue is firmware for the ESP32 version of the Nick2 clock with four IN-12 nixie tubes and a vertical column of five RGB LEDs. A display playlist lets you choose when the clock shows the time, date, temperatures, weather, or a countdown, and how long each stays on the tubes.
 
-**IN-16 version:**
-Schematic, gerber and BOM and 3D model of cover are included.
+Original Nick2 hardware and firmware by [Martin Cerny](https://github.com/mcer12/Nick2-Nixie-Clock). This IN-12 fork is developed and maintained by **Bill Kukowski**, with coding assistance from ChatGPT (Astra).
 
-**Wiki**  
-https://github.com/mcer12/Nick2-Nixie-Clock/wiki
+**Release status:** The first public Nixie Cue firmware release is awaiting hardware testing. The `Firmware/` directory currently contains the original Nick2 sketches. There is no Nixie Cue firmware download yet.
 
-**Enclosure model:**  
-IN-16: https://www.printables.com/model/330845-nick2-in-16-nixie-clock  
-ZM1040: https://www.printables.com/model/418912-nick2-zm1040-nixie-clock
+## What Nixie Cue adds
 
-**Some things to note:**
-- This design is made with small footprint and ultra low-profile in mind, using only 3mm high components.
-- Can be almost completely sourced from LCSC (except for the VFDs of course) and partially assembled using JLCPCB assembly service.
-- Colons made out of WS2812 addressable leds
-- CH340 with NodeMCU style auto-reset built-in for easy programming / debugging
-- Each digit is driven directly, not multiplexed
-- ~100hz refresh rate using HW ISR timer, zero flicker and not affected by wifi activity.
-- NTP based, no battery / RTC. Connect to wifi and you're done.
-- Simple and easy to set up, mobile-friendly web interface
-- diyHue and remote control support
-- 3 levels of brightness, each with 8 more levels for dimming / crossfade. 48 pwm steps in total for each segment!
-- No buttons design. Simple configuration portal is used for settings.
-- Daylight saving (summer time) support built in and super simple to set up.
-- USB-C connector Below 500mA power consumption on 5V on full brightness.
+- **A playlist you can edit in a browser.** Repeat Time between other displays, choose a duration for each step, and run the sequence continuously or align it to wall-clock minutes.
+- **Indoor and outdoor temperatures.** Read room temperature with an optional DS18B20 sensor. Show the current outdoor temperature and today’s or tomorrow’s forecast high and low. Negative readings blink the digits.
+- **Weather you can see on the LEDs.** In a weather step, the tubes keep showing the time while the center LEDs show sunshine, falling rain, or another forecast condition. Forecasts come from [Open-Meteo](https://open-meteo.com/).
+- **Two event countdowns.** Give each event a name, set its date, and choose where it appears in the playlist.
 
-**License:**  
-GPL-3.0 License  
-LGPL-2.1 License (modified SPI library)  
-Mozilla Public License 2.0 (iro.js, https://github.com/jaames/iro.js)
+## IN-12 hardware
+
+The original Nick2 [schematic](Resources/Nick2_in12_schematic.pdf), [parts list](Resources/Nick2_in12_BOM.csv), and board fabrication files ([top](Resources/Nick2_in12_gerber_TOP.zip) and [bottom](Resources/Nick2_in12_gerber_BOTTOM.zip)) are already in this fork. For the IN-16 and ZM1040 variants, see the [original Nick2 project](https://github.com/mcer12/Nick2-Nixie-Clock).
+
+**High voltage:** The tube supply generates high voltage even though the clock is powered over USB. Disconnect power and verify that the supply has discharged before handling the boards.
+
+## License
+
+The firmware is licensed under the [GNU General Public License v3](LICENSE). Third-party components retain their own licenses, including LGPL-2.1 for the original modified SPI library and MPL-2.0 for [iro.js](https://github.com/jaames/iro.js).
